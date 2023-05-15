@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/upperMenu"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/purple_500"
@@ -27,16 +28,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#EA2C2C"
-            android:backgroundTint="#981616"
-            android:text="2.0" />
+            android:backgroundTint="@color/white"
+            android:text="1.0"
+            android:textColor="@color/purple_500"
+            android:textStyle="bold"
+            android:layout_marginEnd="4dp"/>
 
         <Button
             android:id="@+id/size_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Aa" />
+            android:text="Aa"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/purple_500"
+            android:textStyle="bold"/>
 
         <ImageButton
             android:id="@+id/bacground_button"
@@ -51,7 +58,21 @@
 
     </LinearLayout>
 
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/upperMenu"
+        app:layout_constraintBottom_toTopOf="@id/bottomMenu">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textColor="@color/black"/>
+    </ScrollView>
+
     <LinearLayout
+        android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
