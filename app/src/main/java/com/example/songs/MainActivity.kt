@@ -9,6 +9,8 @@ import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.ScrollView
 import android.widget.TextView
+import java.util.Arrays
+import java.util.Collections
 
 class MainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
@@ -17,7 +19,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var scrollView: ScrollView
     private lateinit var speedButton: Button
     private lateinit var backgroundButton: ImageButton
+    private lateinit var previousButton: Button
+    private lateinit var nextButton: Button
     private val lyricsList = mutableListOf<String>()
+    private var selectedSong = 0
     private val fontList = listOf(18, 24, 32)
     private var selectedFont = 0
     private var isScrolling = false
@@ -36,8 +41,12 @@ class MainActivity : AppCompatActivity() {
         scrollView = findViewById(R.id.scrollView)
         speedButton = findViewById(R.id.speeed_button)
         backgroundButton = findViewById(R.id.bacground_button)
+        previousButton = findViewById(R.id.previous_button)
+        nextButton = findViewById(R.id.next_button)
 
-        lyricsList.add(getString(R.string.song1))
+        resources.getStringArray(R.array.songs).forEach {
+            lyricsList.add(it)
+        }
 
         loadSong(0)
         setFontSize(fontList[0])
@@ -50,6 +59,8 @@ class MainActivity : AppCompatActivity() {
 
         speedButton.setOnClickListener{onSpeedButtonClick()}
         backgroundButton.setOnClickListener{onColorButtonClick()}
+        previousButton.setOnClickListener{onPreviousButtonClick()}
+        nextButton.setOnClickListener{onNextButtonClick()}
 
     }
 
@@ -99,5 +110,27 @@ class MainActivity : AppCompatActivity() {
     private fun setBackgroundColor()
     {
         textView.setBackgroundResource(colorList[selectedColor])
+    }
+
+    private fun onPreviousButtonClick()
+    {
+        selectedSong--
+        if (selectedSong < 0)
+        {
+            selectedSong = lyricsList.size - 1
+        }
+
+        loadSong(selectedSong)
+    }
+
+    private fun onNextButtonClick()
+    {
+        selectedSong++
+        if (selectedSong >= lyricsList.size)
+        {
+            selectedSong = 0
+        }
+
+        loadSong(selectedSong)
     }
 }
